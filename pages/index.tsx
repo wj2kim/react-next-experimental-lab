@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { InferGetStaticPropsType, GetStaticProps } from 'next'
 import Head from 'next/head'
 import utilStyles from '../styles/utils.module.css'
 import Layout, { siteTitle } from '../components/layout'
@@ -8,10 +8,21 @@ import Date from '../components/date'
 
 export const getStaticProps = async () => {
   const allPostsData = getSortedPostsData()
+
+  if (!allPostsData) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+
   return {
     props: {
       allPostsData,
     },
+    revalidate: 10,
   }
 }
 
