@@ -5,6 +5,7 @@ import Layout, { siteTitle } from '../components/layout'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
+import { useQuery } from 'react-query'
 
 export const getStaticProps = async () => {
   const allPostsData = getSortedPostsData()
@@ -33,6 +34,8 @@ type AllPostsData = {
 }
 
 const Home = ({ allPostsData }: { allPostsData: AllPostsData[] }) => {
+  useQuery('hello-world')
+
   return (
     <Layout home>
       <Head>
